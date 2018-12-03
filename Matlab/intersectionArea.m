@@ -20,9 +20,11 @@ function [ifstatement, intersectArea, innerPoints, intersectionPoints, arcArea, 
         ifstatement = 'a'
         center = getCenter(innerPoints);
         for i=1:(length(innerPoints))
-            p = innerPoints(i);
-            p.angle = atan2(p.x - center.x, p.y - center.y);
+            innerPoints(i).angle = atan2(innerPoints(i).x - center.x, innerPoints(i).y - center.y);
         end  
+
+        [~, order] = sort([innerPoints(:).angle],'descend');
+        innerPoints = innerPoints(order);
 
         %does not seem to matter
         %innerPoints.sort(function(a,b) { return b.angle - a.angle;})
